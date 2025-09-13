@@ -57,3 +57,16 @@ source venv/bin/activate   # (Windows: venv\Scripts\activate)
 
 # Install dependencies
 pip install -r requirements.txt
+
+```
+## Future Enhancements
+
+This project is a work in progress. Future updates may include:
+
+- Additional geometric shapes and conic sections
+- More advanced computational methods for geometry
+- Interactive visualizations and GUI improvements
+- Enhanced Streamlit app features for educational purposes
+- Utility functions and helper classes for faster computations
+
+Contributions and suggestions are always welcome to make this toolkit more comprehensive and user-friendly.
