@@ -17,3 +17,43 @@ This project implements classes and methods for 2D geometry concepts like **Poin
 ---
 
 ## Project Structure
+```
+coordinate-geometry-toolkit/
+├── .gitignore
+├── README.md
+├── requirements.txt
+│
+├── coordinate_geometry_toolkit/
+│   ├── __init__.py
+│   ├── base.py
+│   ├── circle.py
+│   ├── ellipse.py
+│   ├── hyperbola.py
+│   ├── line.py
+│   ├── main.py
+│   ├── parabola.py
+│   ├── point.py
+│   ├── polygon.py
+│   ├── rectangle.py
+│   ├── square.py
+│   ├── triangle.py
+│   ├── vector.py
+│   └── web_app.py
+
+```
+
+
+---
+
+## Installation
+```bash
+# Clone repo
+git clone https://github.com/YOUR_USERNAME/geometry-toolkit.git
+cd geometry-toolkit
+
+# Create virtual environment (optional but recommended)
+python -m venv venv
+source venv/bin/activate   # (Windows: venv\Scripts\activate)
+
+# Install dependencies
+pip install -r requirements.txt
