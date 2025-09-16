@@ -1,4 +1,5 @@
-# coordinate-geometry-toolkit (OOP in Python)
+## currently  I am working on this project (not completed yet)
+#  coordinate-geometry-toolkit (OOP in Python)
 
 A complete **Coordinate Geometry Toolkit** built using **Object-Oriented Programming (OOP) in Python**.  
 This project implements classes and methods for 2D geometry concepts like **Point, Line, Circle, Triangle, and Conic Sections** (Parabola, Ellipse, Hyperbola).
