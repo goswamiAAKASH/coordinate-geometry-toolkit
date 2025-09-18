@@ -43,6 +43,10 @@ class Triangle(Shape):
         x_cod = (self.p1.x + self.p2.x + self.p3.x) / 3  # changed _x to x
         y_cod = (self.p1.y + self.p2.y + self.p3.y) / 3  # changed _y to y
         return Point(x_cod, y_cod)
+    
+    # Alias for web app compatibility
+    def Centroid(self):
+        return self.centroid()
 
 # Type of Triangle (by sides)
 

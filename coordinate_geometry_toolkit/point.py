@@ -37,6 +37,10 @@ class Point:
     # Distance between two points
     def distance_between_points(self, other):
         return math.sqrt((self._x - other._x)**2 + (self._y - other._y)**2)
+    
+    # Alias for distance_between_points (for backward compatibility)
+    def distance_bw_two_points(self, other):
+        return self.distance_between_points(other)
 
     # returns True if  both points have the same coordinates
     def __eq__(self, other):
@@ -101,5 +105,18 @@ class Point:
         # Import inside method to avoid circular import
         from coordinate_geometry_toolkit.vector import Vector
         return Vector(self._x, self._y)
+    
+    # Alias methods for web_app.py compatibility
+    def reflection_of_point_about_X_Axis(self):
+        return self.reflect_about_x_axis()
+    
+    def reflection_of_point_about_Y_Axis(self):
+        return self.reflect_about_y_axis()
+    
+    def reflection_of_point_about_Origin(self):
+        return self.reflect_about_origin()
+    
+    def quadrant_of_a_point(self):
+        return self.get_quadrant()
     
     
