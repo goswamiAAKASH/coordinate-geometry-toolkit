@@ -1,9 +1,13 @@
 # base.py
-class Shape:
+from abc import ABC, abstractmethod
 
-    # if a inherit class  not add the method in thr class it will raise an error
+class Shape(ABC):
+
+  # if a ***"inherit class"***  not add the  method in thr class it will raise an error
+    @abstractmethod
     def area(self):
-        raise NotImplementedError("Subclasses must implement area method (add the area method)")
+        raise NotImplementedError("Subclasses must implement area method")
 
+    @abstractmethod
     def perimeter(self):
-        raise NotImplementedError("Subclasses must implement perimeter method (add the perimeter method)")
+        raise NotImplementedError("Subclasses must implement perimeter method")

@@ -39,7 +39,7 @@ class Triangle(Shape):
         return round(self.a + self.b + self.c, 2)
 
 #Centroid of Triangle
-    def Centroid(self):           # p1:Point,p2:Point,p3:Point not use these parameteres  here bccz obj already have self.p1, self.p2, self.p3
+    def centroid(self):           # p1:Point,p2:Point,p3:Point not use these parameteres  here bccz obj already have self.p1, self.p2, self.p3
         x_cod = (self.p1.x + self.p2.x + self.p3.x) / 3  # changed _x to x
         y_cod = (self.p1.y + self.p2.y + self.p3.y) / 3  # changed _y to y
         return Point(x_cod, y_cod)

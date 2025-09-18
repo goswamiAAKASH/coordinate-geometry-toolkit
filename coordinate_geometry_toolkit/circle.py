@@ -7,11 +7,29 @@ from coordinate_geometry_toolkit.base import Shape    # added import for Shape c
 class Circle(Shape):
 
     def __init__(self, center: Point, radius: float):
-        self.radius = radius
-        self.center = center
+        self._radius = radius
+        self._center = center
+
+    # Getter and Setter for radius
+    @property
+    def radius(self):
+        return self._radius
+    
+    @radius.setter
+    def radius(self, value):
+        self._radius = value
+    
+    # Getter and Setter for center
+    @property
+    def center(self):
+        return self._center
+    
+    @center.setter
+    def center(self, value):
+        self._center = value
 
     def __str__(self):
-        return f" Circle with center at {self.center} and radius {self.radius}"
+        return f" Circle with center at {self._center} and radius {self._radius}"
 
 # area of circle
     def area(self):

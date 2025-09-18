@@ -11,8 +11,14 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
 import csv
+import sys
+import os
+
+# Add the project root to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 try:
+    # Using absolute imports with the path fix above
     from coordinate_geometry_toolkit.point import Point
     from coordinate_geometry_toolkit.line import Line
     from coordinate_geometry_toolkit.circle import Circle
@@ -25,7 +31,7 @@ try:
     from coordinate_geometry_toolkit.hyperbola import Hyperbola
     from coordinate_geometry_toolkit.parabola import Parabola
 except Exception as e:
-    st.error("Could not import `coordinate_geometry_toolkit`. Make sure the package is in your PYTHONPATH and the app is run from the project root.\n" + str(e))
+    st.error(f"Could not import modules: {str(e)}")
     # Provide a minimal fallback so the rest of the script doesn't crash during inspection.
     Point = Line = Circle = Vector = Triangle = Rectangle = Square = Polygon = Ellipse = Hyperbola = Parabola = object
 

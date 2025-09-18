@@ -30,12 +30,12 @@ class Point:
     def __str__(self):
         return f"({self._x}, {self._y})"
 
-    # Distance_from_Origin
+    # Distance from origin
     def distance_from_origin(self):
         return math.sqrt(self._x**2 + self._y**2)
 
-    # Distance_bw_two_points
-    def distance_bw_two_points(self, other):
+    # Distance between two points
+    def distance_between_points(self, other):
         return math.sqrt((self._x - other._x)**2 + (self._y - other._y)**2)
 
     # returns True if  both points have the same coordinates
@@ -53,24 +53,24 @@ class Point:
         mid_y = (self._y + other._y) / 2
         return Point(mid_x, mid_y)
 
-    # reflection_of_point_about_X_Axis
-    def reflection_of_point_about_X_Axis(self):
+    # Reflection about x-axis
+    def reflect_about_x_axis(self):
         return Point(self._x, -self._y)
 
-    # reflection_of_point_about_Y_Axis
-    def reflection_of_point_about_Y_Axis(self):
+    # Reflection about y-axis
+    def reflect_about_y_axis(self):
         return Point(-self._x, self._y)
 
-    # reflection_of_point_about_Origin
-    def reflection_of_point_about_Origin(self):
+    # Reflection about origin
+    def reflect_about_origin(self):
         return Point(-self._x, -self._y)
 
     # translate a point
     def translate_point(self, m, n):          # m,n ---> translate points
         return Point(self._x + m, self._y + n)
 
-    # Quadrant_of_a_Point
-    def quadrant_of_a_point(self):
+    # Get quadrant of a point
+    def get_quadrant(self):
         if self._x > 0 and self._y > 0:
             return "I Quadrant"
         elif self._x < 0 and self._y > 0:
@@ -98,7 +98,8 @@ class Point:
     
     #vector conversion
     def to_vector(self):
-        from vector import Vector   # avoid circular import
+        # Import inside method to avoid circular import
+        from coordinate_geometry_toolkit.vector import Vector
         return Vector(self._x, self._y)
     
     

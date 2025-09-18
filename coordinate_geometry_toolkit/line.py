@@ -2,28 +2,83 @@
 
 import math
 from coordinate_geometry_toolkit.point import Point
+from coordinate_geometry_toolkit.base import Shape  # Added import for Shape class
   # make sure your Point class is in same package point.py(means Go to the file point.py in the same folder/package as this file, and import the Point class from it.)
 
-class Line:
+class Line(Shape):  
 
     # We define the coordinates (x, y) in the Point class constructor, and then pass two Point objects to the Line class constructor.
 
     def __init__(self, point_1, point_2):
-        self.p1 = point_1                       # p1 is an attribute
-        self.p2 = point_2                       # p2 is an attribute
+        self._p1 = point_1                       # Changed to protected attribute
+        self._p2 = point_2                       # Changed to protected attribute
 
 # dx and dy represent the differences in x and y coordinates between the two points
-        self.dx = self.p1.x - self.p2.x         # changed _x to x (error show ho raha tha kyuki private var access kar karhe jabki humne to getter use karna hai)
-        self.dy = self.p1.y - self.p2.y         # changed _y to y
+        self._dx = self._p1.x - self._p2.x       # Changed to protected attribute (error show ho raha tha kyuki private var access kar karhe jabki humne to getter use karna hai)
+        self._dy = self._p1.y - self._p2.y       # Changed to protected attribute
 # HERE NOTE CONSTRUCTOR does not return any value
 
-        if self.dx == 0:
+        if self._dx == 0:
             # return None
-            self.m = None    # slope is infinite
-            self.is_vertical_line  = True     # then line is verticle
+            self._m = None    # Changed to protected attributeOR  slope is infinite
+            self._is_vertical_line = True     # Changed to protected attribute& then line is verticle
         else:
-            self.m = self.dy / self.dx              # m is slope value
-            self.is_vertical_line  = False
+            self._m = self._dy / self._dx     # Changed to protected attribute, m is slope value
+            self._is_vertical_line = False    # Changed to protected attribute
+            
+    # Getters and setters for encapsulation
+    @property
+    def p1(self):
+        return self._p1
+        
+    @p1.setter
+    def p1(self, value):
+        self._p1 = value
+        self._update_properties()
+        
+    @property
+    def p2(self):
+        return self._p2
+        
+    @p2.setter
+    def p2(self, value):
+        self._p2 = value
+        self._update_properties()
+        
+    @property
+    def dx(self):
+        return self._dx
+        
+    @property
+    def dy(self):
+        return self._dy
+        
+    @property
+    def m(self):
+        return self._m
+        
+    @property
+    def is_vertical_line(self):
+        return self._is_vertical_line
+        
+    def _update_properties(self):
+        self._dx = self._p1.x - self._p2.x
+        self._dy = self._p1.y - self._p2.y
+        if self._dx == 0:
+            self._m = None
+            self._is_vertical_line = True
+        else:
+            self._m = self._dy / self._dx
+            self._is_vertical_line = False
+            
+    # Implementing required abstract methods
+    def area(self):
+        # A line has zero area
+        return 0
+        
+    def perimeter(self):
+        # For a line, perimeter is the same as length
+        return self.length()
 
 
     # how line object look
@@ -39,7 +94,7 @@ class Line:
 
     # Length of the Line Segment
     def length_of_the_line_segment(self):
-        return self.p1.distance_bw_two_points(self.p2)
+        return self.p1.distance_between_points(self.p2)
 
 
     # slope of a line
