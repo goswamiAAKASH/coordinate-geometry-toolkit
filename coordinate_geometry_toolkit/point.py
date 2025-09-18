@@ -38,7 +38,7 @@ class Point:
     def distance_between_points(self, other):
         return math.sqrt((self._x - other._x)**2 + (self._y - other._y)**2)
     
-    # Alias for distance_between_points (for backward compatibility)
+    #  distance_between_points
     def distance_bw_two_points(self, other):
         return self.distance_between_points(other)
 
