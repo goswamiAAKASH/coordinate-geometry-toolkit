@@ -184,3 +184,13 @@ class Parabola(Shape):
         return math.isclose(distance_to_focus, distance_to_directrix, rel_tol=1e-9)
         # This method is use for the "" checks if the point satisfies the focus-directrix property of the parabola".
 
+    # Implementing required abstract methods from Shape base class
+    def area(self):
+        # Parabola has infinite area, but we can return a symbolic representation
+        return float('inf')
+    
+    def perimeter(self):
+        # Parabola has infinite perimeter, but we can return a symbolic representation
+        return float('inf')
+
+    

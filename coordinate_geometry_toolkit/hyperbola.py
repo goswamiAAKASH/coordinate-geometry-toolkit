@@ -142,18 +142,27 @@ class Hyperbola(Shape):
         else:
             return abs((y - k)**2 / self.a**2 - (x - h)**2 / self.b**2 - 1) < 1e-9
         
-# focus-directrix property
-def focus_directrix_property(self, point: Point):
-    distance_to_focus = self.distance_to_focus(point)
-    
-    if self.orientation == "horizontal":
-        directrix = self.center.x - self.a / self.e
-        distance_to_directrix = abs(point.x - directrix)
-    else:
-        directrix = self.center.y - self.a / self.e
-        distance_to_directrix = abs(point.y - directrix)
+    # focus-directrix property
+    def focus_directrix_property(self, point: Point):
+        distance_to_focus = self.distance_to_focus(point)
+        
+        if self.orientation == "horizontal":
+            directrix = self.center.x - self.a / self.e
+            distance_to_directrix = abs(point.x - directrix)
+        else:
+            directrix = self.center.y - self.a / self.e
+            distance_to_directrix = abs(point.y - directrix)
 
-    # returns True if point satisfies focus-directrix property
-    return math.isclose(distance_to_focus, distance_to_directrix, rel_tol=1e-9)
+        # returns True if point satisfies focus-directrix property
+        return math.isclose(distance_to_focus, distance_to_directrix, rel_tol=1e-9)
+
+    # Implementing abstract methods from Shape base class
+    def area(self):
+        # Hyperbola has infinite area, but we can return a symbolic representation
+        return float('inf')
+    
+    def perimeter(self):
+        # Hyperbola has infinite perimeter, but we can return a symbolic representation
+        return float('inf')
 
     

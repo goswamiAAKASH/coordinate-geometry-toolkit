@@ -91,10 +91,13 @@ def compute_bbox(margin=1.0):
             elif t == 'Vector':
                 xs.extend([0, o._x]); ys.extend([0, o._y])
             elif t in ('Triangle','Polygon'):
-                pts = getattr(o, 'vertices', None) or [o.p1, o.p2, getattr(o,'p3',None)]
+                pts = getattr(o, 'vertices', None)
+                if pts is None:
+                    pts = [o.p1, o.p2, getattr(o,'p3',None)]
+                # Filter out None values
+                pts = [p for p in pts if p is not None]
                 for p in pts:
-                    if p is not None:
-                        xs.append(p.x); ys.append(p.y)
+                    xs.append(p.x); ys.append(p.y)
             elif t in ('Rectangle','Square'):
                 p1, p2 = o.p1, o.p2
                 xs.extend([p1.x, p2.x]); ys.extend([p1.y, p2.y])
@@ -107,7 +110,23 @@ def compute_bbox(margin=1.0):
                 try:
                     pts = o.generate_points(n=200)
                 except Exception:
-                    pass
+                    # fall back to sampling around vertex and focus if available
+                    try:
+                        v = o.vertex
+                        h, k = v.x, v.y
+                        a = o.a
+                        if o.orientation == "vertical":
+                            tvals = np.linspace(-5,5,200)
+                            xs_vals = [h + tv for tv in tvals]
+                            ys_vals = [((x - h)**2) / (4 * a) + k for x in xs_vals]
+                        else:
+                            tvals = np.linspace(-5,5,200)
+                            ys_vals = [k + tv for tv in tvals]
+                            xs_vals = [((y - k)**2) / (4 * a) + h for y in ys_vals]
+                        xs.extend(xs_vals)
+                        ys.extend(ys_vals)
+                    except Exception:
+                        pass
                 for p in pts:
                     xs.append(p.x); ys.append(p.y)
         except Exception:
@@ -168,10 +187,13 @@ def plot_all(show_grid=True, show_axes=True, annotate=True):
                 pts = getattr(o, 'vertices', None)
                 if pts is None:
                     pts = [o.p1, o.p2, getattr(o,'p3',None)]
-                xs = [p.x for p in pts] + [pts[0].x]
-                ys = [p.y for p in pts] + [pts[0].y]
-                ax.plot(xs, ys, '-', linewidth=2, color=color)
-                if annotate: ax.annotate(name, (xs[0], ys[0]), fontsize=8)
+                # Filter out None values
+                pts = [p for p in pts if p is not None]
+                if len(pts) >= 2:
+                    xs = [p.x for p in pts] + [pts[0].x]
+                    ys = [p.y for p in pts] + [pts[0].y]
+                    ax.plot(xs, ys, '-', linewidth=2, color=color)
+                    if annotate: ax.annotate(name, (xs[0], ys[0]), fontsize=8)
 
             elif t in ('Rectangle','Square'):
                 p1, p2 = o.p1, o.p2
@@ -208,10 +230,16 @@ def plot_all(show_grid=True, show_axes=True, annotate=True):
                     try:
                         v = o.vertex
                         f = o.focus
-                        p = v.x
-                        tvals = np.linspace(-5,5,200)
-                        xs = [p + tv for tv in tvals]
-                        ys = [o.value_at(xi) for xi in xs]
+                        h, k = v.x, v.y
+                        a = o.a
+                        if o.orientation == "vertical":
+                            tvals = np.linspace(-5,5,200)
+                            xs = [h + tv for tv in tvals]
+                            ys = [((x - h)**2) / (4 * a) + k for x in xs]
+                        else:
+                            tvals = np.linspace(-5,5,200)
+                            ys = [k + tv for tv in tvals]
+                            xs = [((y - k)**2) / (4 * a) + h for y in ys]
                         ax.plot(xs, ys, '-', linewidth=2, color=color)
                     except Exception:
                         pass
@@ -725,7 +753,7 @@ else:
             ('equation', []), ('foci', []), ('vertices', []), ('asymptotes', []), ('eccentricity', []),
             ('transverse_axis_length', []), ('conjugate_axis_length', []), ('point_on_hyperbola', ['point']),
             ('is_between_branches', ['point']), ('distance_to_focus', ['point']), ('generate_points', ['int']),
-            ('is_point_on_hyperbola', ['point']),
+            ('is_point_on_hyperbola', ['point']), ('focus_directrix_property', ['point']),
         ],
         'Parabola': [
             ('equation', []), ('focus_point', []), ('directrix', []), ('latus_rectum_length', []),
