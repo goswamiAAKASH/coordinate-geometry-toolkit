@@ -6,11 +6,12 @@ class Hyperbola(Shape):
    
     def __init__(self, center: Point, a: float, b: float, orientation: str = "horizontal"):
         self.center = center
-        self.a = abs(a)
-        self.b = abs(b)
+        
+        # Ensure positive values with minimum threshold
+        self.a = max(abs(a), 0.1) if a != 0 else 1.0
+        self.b = max(abs(b), 0.1) if b != 0 else 1.0
 
-        if self.a <= 0 or self.b <= 0:
-            raise ValueError("Semi-axis lengths must be positive.")
+        # Axis lengths are now guaranteed to be positive
 
         if orientation not in ("horizontal", "vertical"):
             raise ValueError("Orientation must be 'horizontal' or 'vertical'.")

@@ -574,8 +574,8 @@ with left:
         elif shape_choice == 'Ellipse':
             ecx = st.number_input('Center X', value=0.0)
             ecy = st.number_input('Center Y', value=0.0)
-            a = st.number_input('Semi-major a', value=2.0, min_value=0.0)
-            b = st.number_input('Semi-minor b', value=1.0, min_value=0.0)
+            a = st.number_input('Semi-major a', value=2.0, min_value=0.1)
+            b = st.number_input('Semi-minor b', value=1.0, min_value=0.1)
             if st.form_submit_button('Add Ellipse'):
                 add_shape('Ellipse', Ellipse(Point(ecx,ecy), a, b), name=name or None)
                 st.success('Ellipse added')
@@ -583,8 +583,8 @@ with left:
         elif shape_choice == 'Hyperbola':
             hcx = st.number_input('Center X', value=0.0)
             hcy = st.number_input('Center Y', value=0.0)
-            a = st.number_input('Transverse a', value=2.0, min_value=0.0)
-            b = st.number_input('Conjugate b', value=1.0, min_value=0.0)
+            a = st.number_input('Transverse a', value=2.0, min_value=0.1)
+            b = st.number_input('Conjugate b', value=1.0, min_value=0.1)
             if st.form_submit_button('Add Hyperbola'):
                 add_shape('Hyperbola', Hyperbola(Point(hcx,hcy), a, b), name=name or None)
                 st.success('Hyperbola added')

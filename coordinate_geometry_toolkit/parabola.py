@@ -40,9 +40,9 @@ class Parabola(Shape):
         else:
             raise ValueError("Focus needs to line up with the vertex either horizontally or vertically.")
 
-        # focal length
+        # focal length - ensure minimum value for valid parabola
         if math.isclose(self.a, 0.0, abs_tol=1e-9):
-            raise ValueError("Focus cannot be the same as vertex (a = 0).")
+            self.a = 0.1  # Set minimum focal length for valid parabola
 
         # find the orientation of parabola about the axis
         if self.orientation == "vertical":

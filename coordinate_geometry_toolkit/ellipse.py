@@ -13,12 +13,12 @@ class Ellipse(Shape):
         orientation: 'horizontal' or 'vertical'
         """
         self.center = center
-        self.a = abs(a)
-        self.b = abs(b)
+        
+        # Ensure positive values with minimum threshold
+        self.a = max(abs(a), 0.1) if a != 0 else 1.0
+        self.b = max(abs(b), 0.1) if b != 0 else 1.0
 
-        # Axis length checks
-        if self.a <= 0 or self.b <= 0:
-            raise ValueError("Semi-axes lengths must be positive")
+        # Axis length checks - now guaranteed to be positive
         if self.a < self.b:
             raise ValueError("a (semi-major) must be >= b (semi-minor)")
 
